@@ -15,4 +15,10 @@ object NetworkLayer {
         .baseUrl(BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
+
+    val retrofitService: DataService by lazy {
+        retrofit.create(DataService::class.java)
+    }
+
+    val apiClient = ApiClient(retrofitService)
 }
