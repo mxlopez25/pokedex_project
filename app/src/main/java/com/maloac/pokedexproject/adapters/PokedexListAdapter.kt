@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.maloac.pokedexproject.R
+import com.maloac.pokedexproject.helpers.PokedexContants
 import com.maloac.pokedexproject.models.ResultsItem
 import com.maloac.pokedexproject.screen.DetailActivity
 import java.util.*
@@ -44,8 +45,9 @@ RecyclerView.Adapter<PokedexListAdapter.ViewHolder>()
         holder.itemView.setOnClickListener { it ->
             val context = it.context
             val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("URL", dataSet[position].url)
-            intent.putExtra("INDEX", position.toString())
+            intent.putExtra(PokedexContants.URL_TAG, dataSet[position].url)
+            intent.putExtra(PokedexContants.INDEX_TAG, position.toString())
+            intent.putExtra(PokedexContants.NAME_TAG, dataSet[position].name )
 
             context.startActivity(intent)
         }
