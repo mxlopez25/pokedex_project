@@ -7,7 +7,7 @@ class ApiClient(
     private val retrofitService: DataService
 ) {
 
-    suspend fun getPokemons() : Response<PokedexDataResponse> {
+    suspend fun getAllPokemons() : Response<PokedexDataResponse> {
         return retrofitService.getAllPokemons()
     }
 
