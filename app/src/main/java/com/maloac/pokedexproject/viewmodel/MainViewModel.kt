@@ -20,6 +20,7 @@ class MainViewModel(): ViewModel() {
 
     fun getAllPokemons() {
         viewModelScope.launch {
+            _requestState.value = RequestState.InProcess
             val response = repository.getAllPokemons()
             if (response != null) {
                 Log.d("Response", "${response!!}")
