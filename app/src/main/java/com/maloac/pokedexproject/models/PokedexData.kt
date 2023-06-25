@@ -9,6 +9,7 @@ data class PokedexData(
     val baseExperience: Int? = null,
     val isDefault: Boolean? = null,
     val species: Spicies? = null,
+    val locationAreaEncounters: String? = null,
 
     val abilities: List<Ability>? = null,
     val forms: List<Form>? = null,
