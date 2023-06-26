@@ -10,10 +10,9 @@
         android:id="@+id/tvPokemonMove"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Move Name Here"
-        android:textSize="20sp"
-        android:textStyle="bold"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:textAlignment="center" />
+        android:text="Move Name Here"
+        android:textAlignment="center"
+        android:textSize="15sp" />
 </FrameLayout>
