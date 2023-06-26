@@ -1,5 +1,6 @@
 package com.maloac.pokedexproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -16,6 +17,7 @@ import com.maloac.pokedexproject.databinding.ActivityMainBinding
 import com.maloac.pokedexproject.helpers.MainActivityPrefs
 import com.maloac.pokedexproject.models.PokedexDataResponse
 import com.maloac.pokedexproject.models.ResultsItem
+import com.maloac.pokedexproject.screen.AboutActivity
 import com.maloac.pokedexproject.viewmodel.MainViewModel
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -123,8 +125,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
-        if(id == R.id.iSettings) {
-            Toast.makeText(this, "Settings", Toast.LENGTH_LONG).show()
+        if(id == R.id.iAbout) {
+            Toast.makeText(this, "About", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, AboutActivity::class.java))
             return true
         }
 
