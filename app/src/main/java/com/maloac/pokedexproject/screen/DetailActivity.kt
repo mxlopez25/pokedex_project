@@ -16,6 +16,7 @@ import com.maloac.pokedexproject.helpers.PokedexContants
 import com.maloac.pokedexproject.models.PokedexData
 import com.maloac.pokedexproject.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
+import java.util.*
 
 class DetailActivity : AppCompatActivity() {
     private var _binding: ActivityDetailBinding? = null
@@ -48,7 +49,10 @@ class DetailActivity : AppCompatActivity() {
                     viewModel.pokedexDetail.collect {
                         data ->
                         data.moves?.let { binding.rvMoves.adapter = MovesListAdapter(it) }
-                        data.name?.let { binding.tvPokemonName.text = it }
+                        data.name?.let { pName ->
+                            binding.tvPokemonName.text =
+                            pName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+                        }
                         data.types?.let {
                             if (it.size > 1) {
                                 binding.btnTypeOne.text = it[0].type?.name.toString()
