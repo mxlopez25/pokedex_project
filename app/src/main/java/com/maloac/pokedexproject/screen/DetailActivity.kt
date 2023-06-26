@@ -1,20 +1,13 @@
 package com.maloac.pokedexproject.screen
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.maloac.pokedexproject.R
 import com.maloac.pokedexproject.adapters.MovesListAdapter
@@ -22,7 +15,6 @@ import com.maloac.pokedexproject.databinding.ActivityDetailBinding
 import com.maloac.pokedexproject.helpers.PokedexContants
 import com.maloac.pokedexproject.models.PokedexData
 import com.maloac.pokedexproject.viewmodel.MainViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity() {
