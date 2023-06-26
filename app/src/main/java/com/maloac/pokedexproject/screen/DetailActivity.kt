@@ -3,13 +3,22 @@ package com.maloac.pokedexproject.screen
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.maloac.pokedexproject.R
+import com.maloac.pokedexproject.adapters.MovesListAdapter
 import com.maloac.pokedexproject.databinding.ActivityDetailBinding
 import com.maloac.pokedexproject.helpers.PokedexContants
+import com.maloac.pokedexproject.models.PokedexData
 import com.maloac.pokedexproject.viewmodel.MainViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -34,6 +43,10 @@ class DetailActivity : AppCompatActivity() {
         index = intent.getStringExtra(PokedexContants.INDEX_TAG)
         name = intent.getStringExtra(PokedexContants.NAME_TAG)
 
+        binding.rvMoves.layoutManager = LinearLayoutManager(this)
+        binding.rvMoves.adapter = MovesListAdapter(listOf(PokedexData.Move("Loading", url="Loading")))
+        binding.tvPokemonName.text = name.toString()
+
         name?.let { viewModel.getPokemonByName(it) }
 
         lifecycleScope.launch {
@@ -42,6 +55,7 @@ class DetailActivity : AppCompatActivity() {
                     viewModel.pokedexDetail.collect {
                         data ->
                         Log.d("DataReceived", "$data")
+                        data.moves?.let { binding.rvMoves.adapter = MovesListAdapter(it) }
                     }
                 }
 
@@ -50,13 +64,19 @@ class DetailActivity : AppCompatActivity() {
                         state ->
                         when(state) {
                             is MainViewModel.RequestState.InProcess -> {
-
+                                binding.tvDetailsError.isVisible = false
+                                binding.clPokemonDetails.isVisible = false
+                                binding.detailsProgressBar.isVisible = true
                             }
                             is MainViewModel.RequestState.Success -> {
-
+                                binding.tvDetailsError.isVisible = false
+                                binding.clPokemonDetails.isVisible = true
+                                binding.detailsProgressBar.isVisible = false
                             }
                             is MainViewModel.RequestState.Error -> {
-
+                                binding.tvDetailsError.isVisible = true
+                                binding.clPokemonDetails.isVisible = false
+                                binding.detailsProgressBar.isVisible = false
                             } else -> Unit
                         }
                     }
