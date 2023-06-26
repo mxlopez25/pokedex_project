@@ -17,7 +17,7 @@ data class PokedexData(
     val forms: List<Form>? = emptyList(),
     val gameIndeces: List<GameIndex>? = emptyList(),
     @Json(name="moves")
-    val moves: List<Move>? = emptyList(),
+    val moves: List<Moves>? = emptyList(),
     val stats: List<Stat>? = emptyList(),
     val types: List<Type>? = emptyList()
 ) {
@@ -43,9 +43,30 @@ data class PokedexData(
         val version: Version? = Version()
     )
 
+    data class Moves(
+        val move: Move? = null,
+        val versionGroupDetails: VersionGroupDetails? = null
+    )
+
     data class Move(
-        val name: String,
-        val url: String
+        val name: String? = "",
+        val url: String? = ""
+    )
+
+    data class VersionGroupDetails(
+        val levelLearnedAt: Int? = 0,
+        val moveLearnMethod: MoveLearnMethod? = null,
+        val versionGroup: VersionGroup
+    )
+
+    data class VersionGroup(
+        val name: String? = "",
+        val url: String? = ""
+    )
+
+    data class MoveLearnMethod(
+        val name: String? = "",
+        val url: String? = ""
     )
 
     data class Spicies(
@@ -66,3 +87,4 @@ data class PokedexData(
         val url: String? = null
     )
 }
+
