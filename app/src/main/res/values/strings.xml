@@ -10,4 +10,6 @@
     <string name="type_one_label">Type One</string>
     <string name="no_type_label">No Type</string>
     <string name="settings_label">Settings</string>
+    <string name="move_level_here_label">Move Level Here</string>
+    <string name="move_name_here_label">Move Name Here</string>
 </resources>
