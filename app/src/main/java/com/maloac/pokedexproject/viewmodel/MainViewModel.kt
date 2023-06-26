@@ -10,7 +10,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class MainViewModel(): ViewModel() {
+class MainViewModel: ViewModel() {
+
     private val repository = SharedRepository()
 
     private var _requestState = MutableStateFlow<RequestState>(RequestState.Empty)
@@ -27,7 +28,7 @@ class MainViewModel(): ViewModel() {
             _requestState.value = RequestState.InProcess
             val response = repository.getAllPokemons()
             if (response != null) {
-                Log.d("Response", "${response}")
+                Log.d("Response", "$response")
                 _requestState.value = RequestState.Success
                 _pokemonList.value = response
             } else {
