@@ -1,5 +1,6 @@
 package com.maloac.pokedexproject.screen
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -44,8 +45,8 @@ class DetailActivity : AppCompatActivity() {
         name = intent.getStringExtra(PokedexContants.NAME_TAG)
 
         binding.rvMoves.layoutManager = LinearLayoutManager(this)
-        binding.rvMoves.adapter = MovesListAdapter(listOf(PokedexData.Move("Loading", url="Loading")))
-        binding.tvPokemonName.text = name.toString()
+        binding.rvMoves.adapter = MovesListAdapter(listOf(PokedexData.Moves(PokedexData.Move(name = "Loading", url = "Loading"))))
+
 
         name?.let { viewModel.getPokemonByName(it) }
 
@@ -56,6 +57,16 @@ class DetailActivity : AppCompatActivity() {
                         data ->
                         Log.d("DataReceived", "$data")
                         data.moves?.let { binding.rvMoves.adapter = MovesListAdapter(it) }
+                        data.name?.let { binding.tvPokemonName.text = it }
+                        data.types?.let {
+                            if (it.size > 1) {
+                                binding.btnTypeOne.text = it[0].type?.name.toString()
+                                binding.btnTypeTwo.text = it[1].type?.name.toString()
+                            } else {
+                                binding.btnTypeOne.text = it[0].type?.name.toString()
+                            }
+                        }
+
                     }
                 }
 
