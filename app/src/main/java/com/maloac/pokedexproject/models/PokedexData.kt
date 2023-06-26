@@ -1,43 +1,46 @@
 package com.maloac.pokedexproject.models
 
+import com.squareup.moshi.Json
+
 data class PokedexData(
     val id: Int? = null,
     val order: Int? = null,
-    val name: String? = null,
+    val name: String? = "",
     val height: Int? = null,
     val weight: Int? = null,
     val baseExperience: Int? = null,
-    val isDefault: Boolean? = null,
+    val isDefault: Boolean? = false,
     val species: Spicies? = null,
     val locationAreaEncounters: String? = null,
 
-    val abilities: List<Ability>? = null,
-    val forms: List<Form>? = null,
-    val gameIndeces: List<GameIndex>? = null,
-    val moves: List<Move>? = null,
-    val stats: List<Stat>? = null,
-    val types: List<Type>? = null
+    val abilities: List<Ability>? = emptyList(),
+    val forms: List<Form>? = emptyList(),
+    val gameIndeces: List<GameIndex>? = emptyList(),
+    @Json(name="moves")
+    val moves: List<Move>? = emptyList(),
+    val stats: List<Stat>? = emptyList(),
+    val types: List<Type>? = emptyList()
 ) {
     data class Ability(
-        val name: String,
-        val url: String,
-        val isHidden: Boolean,
-        val slot: Int
+        val name: String? = "",
+        val url: String? = "",
+        val isHidden: Boolean = false,
+        val slot: Int = 0
     )
 
     data class Form(
-        val name: String,
-        val url: String
+        val name: String? = "",
+        val url: String? = ""
     )
 
     data class Version(
-        val name: String,
-        val url: String
+        val name: String? = "",
+        val url: String? = ""
     )
 
     data class GameIndex(
-        val gameIndex: Int,
-        val version: Version
+        val gameIndex: Int = 0,
+        val version: Version? = Version()
     )
 
     data class Move(
@@ -46,20 +49,20 @@ data class PokedexData(
     )
 
     data class Spicies(
-        val name: String,
-        val url: String
+        val name: String? = "",
+        val url: String? = ""
     )
 
     data class Stat(
-        val name: String,
-        val url: String,
-        val effort: Int,
-        val baseStat: Int
+        val name: String? = "",
+        val url: String? = "",
+        val effort: Int = 0,
+        val baseStat: Int = 0
     )
 
     data class Type(
-        val slot: Int,
-        val name: String,
-        val url: String
+        val slot: Int = 0,
+        val name: String? = "",
+        val url: String? = null
     )
 }
