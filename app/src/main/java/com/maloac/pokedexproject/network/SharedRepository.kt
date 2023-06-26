@@ -7,21 +7,29 @@ class SharedRepository {
     suspend fun getAllPokemons(): PokedexDataResponse? {
         val request = NetworkLayer.apiClient.getAllPokemons()
 
-        if (request.isSuccessful) {
-            return request.body()!!
+        if(request.failed) {
+           return null
         }
 
-        return null
+        if (!request.isSuccessful) {
+            return null
+        }
+
+        return request.body
     }
 
     suspend fun getPokemonByName(name: String): PokedexData? {
         val request = NetworkLayer.apiClient.getPokemonByName(name)
 
-        if (request.isSuccessful) {
-            return request.body()!!
+        if(request.failed) {
+            return null
         }
 
-        return null
+        if (!request.isSuccessful) {
+            return null
+        }
+
+        return request.body
     }
 
 }

@@ -8,12 +8,24 @@ class ApiClient(
     private val retrofitService: DataService
 ) {
 
-    suspend fun getAllPokemons() : Response<PokedexDataResponse> {
-        return retrofitService.getAllPokemons()
+    suspend fun getAllPokemons() : DataResponseHandler<PokedexDataResponse> {
+        return safeApiCall {
+            retrofitService.getAllPokemons()
+        }
     }
 
-    suspend fun getPokemonByName(name: String): Response<PokedexData> {
-        return retrofitService.getPokemonByName(name)
+    suspend fun getPokemonByName(name: String): DataResponseHandler<PokedexData> {
+        return safeApiCall {
+            retrofitService.getPokemonByName(name)
+        }
     }
 
+
+    private inline fun<T> safeApiCall(apiCall: () -> Response<T>): DataResponseHandler<T> {
+        return try {
+            DataResponseHandler.success(apiCall.invoke())
+        } catch (e: Exception) {
+            DataResponseHandler.failure<T>(e)
+        }
+    }
 }
