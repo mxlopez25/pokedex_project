@@ -27,9 +27,9 @@ class MainViewModel(): ViewModel() {
             _requestState.value = RequestState.InProcess
             val response = repository.getAllPokemons()
             if (response != null) {
-                Log.d("Response", "${response!!}")
+                Log.d("Response", "${response}")
                 _requestState.value = RequestState.Success
-                _pokemonList.value = response!!
+                _pokemonList.value = response
             } else {
                 _requestState.value = RequestState.Empty
             }
@@ -45,7 +45,7 @@ class MainViewModel(): ViewModel() {
             if (response != null) {
                 Log.d("Detail Response", "$response")
                 _requestState.value = RequestState.Success
-                _pokemonDetail.value = response!!
+                _pokemonDetail.value = response
             } else {
                 _requestState.value = RequestState.Empty
             }
