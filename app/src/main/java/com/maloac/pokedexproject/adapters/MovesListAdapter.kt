@@ -9,7 +9,7 @@ import com.maloac.pokedexproject.R
 import com.maloac.pokedexproject.models.PokedexData
 import java.util.*
 
-class MovesListAdapter(private val dataSet: List<PokedexData.Move>) :
+class MovesListAdapter(private val dataSet: List<PokedexData.Moves>) :
 RecyclerView.Adapter<MovesListAdapter.ViewHolder>() {
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -28,11 +28,11 @@ RecyclerView.Adapter<MovesListAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvPokemonMove.text = dataSet[position].name?.replaceFirstChar {
+        holder.tvPokemonMove.text = dataSet[position].move?.let { move -> move.name?.replaceFirstChar {
             if (it.isLowerCase()) it.titlecase(
-                Locale.getDefault()
+                Locale.ROOT
             ) else it.toString()
-        }
+        } }
     }
 
     override fun getItemCount(): Int {
