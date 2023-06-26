@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.maloac.pokedexproject.R
 import com.maloac.pokedexproject.adapters.MovesListAdapter
 import com.maloac.pokedexproject.databinding.ActivityDetailBinding
@@ -47,7 +48,6 @@ class DetailActivity : AppCompatActivity() {
         binding.rvMoves.layoutManager = LinearLayoutManager(this)
         binding.rvMoves.adapter = MovesListAdapter(listOf(PokedexData.Moves(PokedexData.Move(name = "Loading", url = "Loading"))))
 
-
         name?.let { viewModel.getPokemonByName(it) }
 
         lifecycleScope.launch {
@@ -65,6 +65,7 @@ class DetailActivity : AppCompatActivity() {
                                 binding.btnTypeOne.text = it[0].type?.name.toString()
                             }
                         }
+                        changeImage(data.order.toString())
 
                     }
                 }
@@ -93,6 +94,12 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
 
+    fun changeImage(order: String){
+        Glide.with(this)
+            .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$order.png")
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(binding.ivPokemonImage)
     }
 }
