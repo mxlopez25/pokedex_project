@@ -40,10 +40,10 @@ class MainViewModel(): ViewModel() {
     fun getPokemonByName(name: String?) {
         viewModelScope.launch {
             _requestState.value = RequestState.InProcess
-            val response = name?.let { repository.getPokemonByName(it) }
+            val response = name?.let {   repository.getPokemonByName(it) }
 
             if (response != null) {
-                Log.d("Detail Response", "${response!!}")
+                Log.d("Detail Response", "$response")
                 _requestState.value = RequestState.Success
                 _pokemonDetail.value = response!!
             } else {
