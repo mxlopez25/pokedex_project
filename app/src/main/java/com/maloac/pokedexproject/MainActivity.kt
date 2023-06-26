@@ -27,19 +27,15 @@ class MainActivity : AppCompatActivity() {
 
     var adapter: PokedexListAdapter? = null
 
-    lateinit var rvPokedex: RecyclerView
-    lateinit var progressBar: ProgressBar
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        progressBar = findViewById(R.id.progressBar)
-        rvPokedex = findViewById(R.id.rvPokedex)
-        rvPokedex.layoutManager = LinearLayoutManager(this)
+
+        binding.rvPokedex.layoutManager = LinearLayoutManager(this)
         adapter = PokedexListAdapter(listOf(ResultsItem(name = "Test", url = "Test")))
-        rvPokedex.adapter = adapter
+        binding.rvPokedex.adapter = adapter
 
         viewModel.getAllPokemons()
 
@@ -49,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                     viewModel.pokemonList.collect {
                             data ->
                         adapter = data.results?.let { it -> PokedexListAdapter(it) }
-                        rvPokedex.adapter = adapter
+                        binding.rvPokedex.adapter = adapter
                     }
                 }
 
@@ -58,12 +54,12 @@ class MainActivity : AppCompatActivity() {
                         state ->
                         when (state) {
                             is MainViewModel.RequestState.InProcess -> {
-                                rvPokedex.isVisible = false
-                                progressBar.isVisible = true
+                                binding.rvPokedex.isVisible = false
+                                binding.progressBar.isVisible = true
                             }
                             is MainViewModel.RequestState.Success -> {
-                                rvPokedex.isVisible = true
-                                progressBar.isVisible = false
+                                binding.rvPokedex.isVisible = true
+                                binding.progressBar.isVisible = false
                             }
                             is MainViewModel.RequestState.Error -> {
 
