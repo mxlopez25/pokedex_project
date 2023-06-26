@@ -61,7 +61,7 @@ class DetailActivity : AppCompatActivity() {
                                 binding.btnTypeOne.text = it[0].type?.name.toString()
                             }
                         }
-                        changeImage(data.order.toString())
+                        changeImage(data.id.toString())
 
                     }
                 }
@@ -92,9 +92,9 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    fun changeImage(order: String){
+    fun changeImage(id: String){
         Glide.with(this)
-            .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$order.png")
+            .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png")
             .placeholder(R.drawable.ic_launcher_background)
             .into(binding.ivPokemonImage)
     }
