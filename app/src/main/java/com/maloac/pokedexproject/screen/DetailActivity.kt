@@ -55,7 +55,6 @@ class DetailActivity : AppCompatActivity() {
                 launch {
                     viewModel.pokedexDetail.collect {
                         data ->
-                        Log.d("DataReceived", "$data")
                         data.moves?.let { binding.rvMoves.adapter = MovesListAdapter(it) }
                         data.name?.let { binding.tvPokemonName.text = it }
                         data.types?.let {
