@@ -8,4 +8,5 @@
     <string name="moves_label">Moves</string>
     <string name="type_two_label">Type Two</string>
     <string name="type_one_label">Type One</string>
+    <string name="no_type_label">No Type</string>
 </resources>
