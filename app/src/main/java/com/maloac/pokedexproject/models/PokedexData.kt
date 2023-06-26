@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 data class PokedexData(
     val id: Int? = null,
     val order: Int? = null,
-    val name: String? = "",
+    val name: String? = null,
     val height: Int? = null,
     val weight: Int? = null,
     val baseExperience: Int? = null,
@@ -13,13 +13,14 @@ data class PokedexData(
     val species: Spicies? = null,
     val locationAreaEncounters: String? = null,
 
-    val abilities: List<Ability>? = emptyList(),
-    val forms: List<Form>? = emptyList(),
-    val gameIndeces: List<GameIndex>? = emptyList(),
+    val abilities: List<Ability>? = null,
+    val forms: List<Form>? = null,
+    val gameIndeces: List<GameIndex>? = null,
     @Json(name="moves")
-    val moves: List<Moves>? = emptyList(),
-    val stats: List<Stat>? = emptyList(),
-    val types: List<Type>? = emptyList()
+    val moves: List<Moves>? = null,
+    val stats: List<Stat>? = null,
+    @Json(name="types")
+    val types: List<TypesSet>? = null
 ) {
     data class Ability(
         val name: String? = "",
@@ -81,10 +82,14 @@ data class PokedexData(
         val baseStat: Int = 0
     )
 
-    data class Type(
+    data class TypesSet(
         val slot: Int = 0,
+        val type: Type? = null
+    )
+
+    data class Type(
         val name: String? = "",
-        val url: String? = null
+        val url: String? = ""
     )
 }
 
